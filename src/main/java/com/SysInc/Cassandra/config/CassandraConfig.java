@@ -16,12 +16,14 @@ import org.springframework.data.cassandra.core.convert.MappingCassandraConverter
 import org.springframework.data.cassandra.core.mapping.BasicCassandraMappingContext;
 import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @Configuration
 @PropertySource(value = {"classpath:cassandra.properties"})
+@EnableWebMvc
 @ComponentScan(basePackages = {"com.SysInc.Cassandra"})
-@EnableCassandraRepositories(basePackages = { "com.SysInc.Cassandra" })
+@EnableCassandraRepositories(basePackages = { "com.SysInc.Cassandra.repo" })
 public class CassandraConfig {
 
     @Autowired
@@ -52,7 +54,7 @@ public class CassandraConfig {
         session.setCluster(cluster().getObject());
         session.setKeyspaceName(environment.getProperty("cassandra.keyspace"));
         session.setConverter(converter());
-        session.setSchemaAction(SchemaAction.NONE);
+        session.setSchemaAction(SchemaAction.CREATE_IF_NOT_EXISTS);
         return session;
     }
     @Bean

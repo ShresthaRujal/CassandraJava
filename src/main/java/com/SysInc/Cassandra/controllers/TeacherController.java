@@ -19,8 +19,7 @@ public class TeacherController {
 
         @GetMapping
         public ResponseEntity<Object> findAll(){
-            System.out.println("rujal");
-            return new ResponseEntity<Object>(teacherService.findAll(), HttpStatus.OK);
+            return new ResponseEntity<Object>(teacherService.findAll(),HttpStatus.OK);
         }
 
         @PostMapping

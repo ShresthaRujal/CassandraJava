@@ -1,8 +1,8 @@
 package com.SysInc.Cassandra.dao;
 
 import com.SysInc.Cassandra.model.Teacher;
+import com.SysInc.Cassandra.repo.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,13 +11,13 @@ import java.util.List;
 public class TeacherDaoImpl implements TeacherDao {
 
     @Autowired
-    private CassandraOperations cassandraTemplate;
+    TeacherRepository teacherRepository;
 
     public List<Teacher> findAll() {
-        return cassandraTemplate.select("select * from teacher",Teacher.class);
+        return teacherRepository.findAll();
     }
 
     public void save(Teacher teacher) {
-        cassandraTemplate.insert(teacher);
+        teacherRepository.save(teacher);
     }
 }

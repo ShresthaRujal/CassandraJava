@@ -5,6 +5,6 @@ import com.SysInc.Cassandra.model.Teacher;
 import java.util.List;
 
 public interface TeacherDao {
-    public List<Teacher> findAll();
-    public void save(Teacher teacher);
+    List<Teacher> findAll();
+    void save(Teacher teacher);
 }
